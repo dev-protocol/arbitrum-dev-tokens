@@ -1,37 +1,35 @@
-/* eslint-disable @typescript-eslint/prefer-readonly-parameter-types */
-import { ethers, providers, ContractFactory } from 'ethers'
-import { config, DotenvParseOutput } from 'dotenv'
-import { Class } from 'type-fest'
-import Provider = providers.Provider
+import { ethers } from 'hardhat'
 
-export type ContractDeployer = (
-	_wallet: ethers.Wallet,
-	_factory: Class<ContractFactory>,
-	_envs: DotenvParseOutput
-) => Promise<void>
+async function main() {
 
-const getDeployer = (
-	deployMnemonic?: string,
-	deployNodeUrl = 'http://127.0.0.1:8545'
-): ethers.Wallet => {
-	if (!deployMnemonic) {
-		throw new Error(
-			`Error: No DEPLOY_MNEMONIC env var set. Please add it to .<environment>.env file it and try again. See .env.example for more info.\n`
-		)
-	}
+	// !please check!!!!!!!!!
+	const initialSupply = 10 * 10**6 * 10**18; // 10 mil
+	const l2gateway = '';
+	const l1Address = '';
+	// !!!!!!!!!!!!!!!!!!!!!!
 
-	// Connect provider
-	const provider: Provider = new ethers.providers.JsonRpcProvider(deployNodeUrl)
+	const [deployer] = await ethers.getSigners();
+	console.log("Deploying contracts with the account:", deployer.address);
+	console.log("Account balance:", (await deployer.getBalance()).toString());
 
-	return ethers.Wallet.fromMnemonic(deployMnemonic).connect(provider)
+	// We get the contract to deploy
+	const Dev = await ethers.getContractFactory("Dev");
+	const dev = await Dev.deploy(
+		initialSupply,
+		l2gateway,
+		l1Address
+	);
+
+	await dev.deployed();
+
+	console.log("Dev deployed to:", dev.address);
 }
 
-export const deploy = async (deployer: ContractDeployer): Promise<void> => {
-	const envs = config().parsed ?? {}
-	const mnemonic = envs.DEPLOY_MNEMONIC
-	const node = envs.DEPLOY_NODE_URL
-	const wallet = getDeployer(mnemonic, node)
-
-	console.log(`Deploying to network [${node ?? 'local'}]`)
-	await deployer(wallet, ContractFactory, envs)
-}
+// We recommend this pattern to be able to use async/await everywhere
+// and properly handle errors.
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

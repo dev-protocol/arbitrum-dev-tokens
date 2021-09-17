@@ -23,8 +23,8 @@ contract DEV is Initializable, ERC20Upgradeable, IArbToken {
 	) public initializer {
 		__ERC20_init("Dev", "DEV");
 		_mint(_msgSender(), initialSupply);
-		l1Address = _l1Address;
 		l2Gateway = _l2Gateway;
+		l1Address = _l1Address;
 	}
 
 	/// Mint new DEV tokens

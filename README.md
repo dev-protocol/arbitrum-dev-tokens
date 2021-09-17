@@ -1,10 +1,6 @@
-# template-repos-ts-sol
-
-Template repository for using TypeScript and Solidity
+# Arbitrum DEV Tokens
 
 # Usage
-
-Create a repository using this template; just runs following command.
 
 ```bash
 yarn

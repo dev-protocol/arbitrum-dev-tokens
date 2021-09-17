@@ -13,8 +13,8 @@ module.exports = {
 	solidity: '0.8.7',
 	networks: {
 		rinkeby: {
-		  url: envs.DEPLOY_NODE_URL,
-		  accounts: { mnemonic: envs.DEPLOY_MNEMONIC },
-		}
-	}
+			url: envs.DEPLOY_NODE_URL,
+			accounts: { mnemonic: envs.DEPLOY_MNEMONIC },
+		},
+	},
 }

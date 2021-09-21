@@ -2,7 +2,8 @@ import { ethers, upgrades } from 'hardhat'
 
 async function main() {
 	// !please check!!!!!!!!!
-	const initialSupply = 10 * 10 ** 6 * 10 ** 18 // 10 mil
+	const decimals = ethers.BigNumber.from(10).pow(18)
+	const initialSupply = ethers.BigNumber.from(10).pow(6).mul(decimals) // 10 mil DEV
 	const l2gateway = ''
 	const l1Address = ''
 	// !!!!!!!!!!!!!!!!!!!!!!

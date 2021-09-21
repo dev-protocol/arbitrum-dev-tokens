@@ -4,6 +4,7 @@
 import '@typechain/hardhat'
 import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-waffle'
+import '@openzeppelin/hardhat-upgrades'
 
 import { config } from 'dotenv'
 
@@ -14,6 +15,10 @@ module.exports = {
 	networks: {
 		rinkeby: {
 			url: envs.DEPLOY_NODE_URL,
+			accounts: { mnemonic: envs.DEPLOY_MNEMONIC },
+		},
+		rinkArby: {
+			url: 'https://rinkeby.arbitrum.io/rpc',
 			accounts: { mnemonic: envs.DEPLOY_MNEMONIC },
 		},
 	},

@@ -6,7 +6,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "./interface/IArbToken.sol";
 
 /// @title Upgradeable Arbitrum-compliant DEV Token
-contract DEV is Initializable, ERC20Upgradeable, IArbToken {
+contract Dev is Initializable, ERC20Upgradeable, IArbToken {
 	address public l2Gateway;
 	address public override l1Address;
 

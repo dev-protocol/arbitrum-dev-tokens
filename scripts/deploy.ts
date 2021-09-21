@@ -1,4 +1,4 @@
-import { ethers } from 'hardhat'
+import { ethers, upgrades } from 'hardhat'
 
 async function main() {
 	// !please check!!!!!!!!!
@@ -13,7 +13,7 @@ async function main() {
 
 	// We get the contract to deploy
 	const Dev = await ethers.getContractFactory('Dev')
-	const dev = await Dev.deploy(initialSupply, l2gateway, l1Address)
+	const dev = await upgrades.deployProxy(Dev, [initialSupply, l2gateway, l1Address])
 
 	await dev.deployed()
 

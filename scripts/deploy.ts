@@ -13,7 +13,11 @@ async function main() {
 
 	// We get the contract to deploy
 	const Dev = await ethers.getContractFactory('Dev')
-	const dev = await upgrades.deployProxy(Dev, [initialSupply, l2gateway, l1Address])
+	const dev = await upgrades.deployProxy(Dev, [
+		initialSupply,
+		l2gateway,
+		l1Address,
+	])
 
 	await dev.deployed()
 
